@@ -36,7 +36,7 @@ impl Pattern {
 pub(super) enum PatternError {
     #[error("the pattern's length exceeds 39 characters or the pattern is empty")]
     InvalidPatternLength,
-    #[error("the patters is not in hexadecimal format")]
+    #[error("the pattern is not in hexadecimal format")]
     NonHexPattern,
 }
 
@@ -71,8 +71,12 @@ pub(super) enum Maldon {
         factory: Option<Address>,
         /// Hash of the initialization code.
         init_code_hash: FixedBytes<32>,
-        /// Pattern to search for. Must be hex digits only and between 1 and 20 characters.
-        pattern: Pattern,
+        /// Optional pattern to search for. Must be hex digits only and between 1 and 20 characters.
+        #[clap(long)]
+        starts_pattern: Option<Pattern>,
+        /// Optional pattern to search for. Must be hex digits only and between 1 and 20 characters.
+        #[clap(long)]
+        ends_pattern: Option<Pattern>,
     },
     /// Mines a CREATE3 salt.
     Create3 {
@@ -81,8 +85,12 @@ pub(super) enum Maldon {
         /// Address of the Factory contract. Defaults to the Aori Factory.
         #[clap(short, long)]
         factory: Option<Address>,
-        /// Pattern to search for. Must be hex digits only and between 1 and 20 characters.
-        pattern: Pattern,
+        /// Optional pattern to search for. Must be hex digits only and between 1 and 20 characters.
+        #[clap(long)]
+        starts_pattern: Option<Pattern>,
+        /// Optional pattern to search for. Must be hex digits only and between 1 and 20 characters.
+        #[clap(long)]
+        ends_pattern: Option<Pattern>,
     },
 }
 
