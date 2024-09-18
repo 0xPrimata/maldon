@@ -10,3 +10,4 @@
     rand            ="0.8"
     rayon           ="1.10"
     thiserror       ="1"
+    cust = "0.3.2"
